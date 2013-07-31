@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('dlplateformApp').controller('MainCtrl', function ($scope, $log, T411Authz) {
+angular.module('dlplateformApp').controller('MainCtrl', function ($scope, $log, Torrent) {
 
     $log.info('coucou');
 
-    T411Authz.connect('mortadeo','G1seedbox&');
+    Torrent.top100().then(function(data){
+      $scope.data=data.data;
+    });
   });

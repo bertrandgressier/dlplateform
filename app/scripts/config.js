@@ -2,6 +2,6 @@
 
 angular.module('config',[]).constant('Properties',{
 
-    t411EndPoint: 'http://api.t411.me'
+    t411EndPoint: 'https://88.191.178.154/t411'
 
   });

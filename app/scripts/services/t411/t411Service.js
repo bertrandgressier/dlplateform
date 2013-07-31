@@ -1,15 +1,12 @@
 'use strict';
 
-angular.module('t411service').factory('T411Authz', function (Properties, $http) {
+angular.module('t411service').factory('Torrent', function (Properties, $http) {
 
-    var T411Authz = {};
+    var Torrent = {};
 
-    T411Authz.connect = function (login, password) {
-        return $http.post(Properties.t411EndPoint + '/auth/', {
-            username: login,
-            secret: password
-          });
+    Torrent.top100 = function () {
+        return $http.get(Properties.t411EndPoint + '/torrents/top/100/');
       };
 
-    return T411Authz;
+    return Torrent;
   });
