@@ -1,10 +1,8 @@
 'use strict';
 
-angular.module('dlplateformApp').controller('MainCtrl', function ($scope, $log, Torrent) {
+angular.module('dlplateformApp').controller('MainCtrl', function ($scope,Torrent) {
 
-    $log.info('coucou');
-
-    Torrent.top100().then(function(data){
-      $scope.data=data.data;
+    Torrent.top100().then(function(top100){
+      $scope.top100=top100;
     });
   });

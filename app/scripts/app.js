@@ -13,6 +13,9 @@ angular.module('dlplateformApp').config(function ($routeProvider, $httpProvider 
       });
 
     $httpProvider.defaults.useXDomain = true;
+    //delete $httpProvider.defaults.headers.common['X-Requested-With'];
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.headers.common.Authorization = '94785113:212:44e97b74e4acace9da2b32dea7a3ee00';
+
+    console.log($httpProvider.defaults.headers.common);
   });
