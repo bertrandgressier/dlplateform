@@ -3,6 +3,7 @@
     <thead>
         <tr>
             <th>Titre</th>
+            <th>Size</th>
             <th>Seeder</th>
             <th>Leecher</th>
         </tr>
@@ -10,6 +11,7 @@
     <tbody>
         <tr ng-repeat="top in top100">
             <td>{{ top.name }}</td>
+            <td ng-style="{width:100}">{{ top.size|bytesToMo }}</td>
             <td>{{ top.seeders }}</td>
             <td>{{ top.leechers }}</td>
         </tr>
