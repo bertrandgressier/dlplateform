@@ -1,6 +1,10 @@
 <form name="login">
     <fieldset>
-        <legend>T411 Login</legend>
+        <legend>Transmission Login</legend>
+        <div class="form-group">
+            <label for="server">Transmission URL</label>
+            <input type="text" class="form-control" id="server" placeholder="Enter url server name" ng-model="user.server" required>
+        </div>
         <div class="form-group">
             <label for="user">Username</label>
             <input type="text" class="form-control" id="user" placeholder="Enter username" ng-model="user.login" required>

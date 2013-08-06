@@ -14,13 +14,16 @@ angular.module('t411service').factory('T411Auth', function (Properties, $http, $
 
 
             localStorage.t411token = data.data.token;
-            $http.defaults.headers.common.Authorization = data.data.token;
 
             return data.data;
 
         }, function (data) {
             return $q.reject(data.data);
         });
+    };
+
+    T411Auth.getAuthorization = function () {
+        return localStorage.t411token;
     };
 
     return T411Auth;

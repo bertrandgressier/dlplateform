@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dlplateformApp', ['t411service']);
+angular.module('dlplateformApp', ['t411service','transmissionservice']);
 angular.module('dlplateformApp').config(function ($routeProvider, $httpProvider) {
 
     $routeProvider.when('/', {
@@ -9,6 +9,12 @@ angular.module('dlplateformApp').config(function ($routeProvider, $httpProvider)
         }).when('/connect',{
             templateUrl: 'views/connect.html',
             controller: 'T411ConnectCtrl'
+        }).when('/connectTr',{
+            templateUrl: 'views/transmissionConnect.html',
+            controller: 'TransmissionConnectCtrl'
+        }).when('/transmissionInfo',{
+            templateUrl: 'views/transmissionInfo.html',
+            controller: 'TransmissionInfoCtrl'
         }).
         otherwise({
             redirectTo: '/'

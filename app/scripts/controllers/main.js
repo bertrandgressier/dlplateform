@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dlplateformApp').controller('MainCtrl', function ($scope,Torrent) {
+angular.module('dlplateformApp').controller('MainCtrl', function ($scope,Torrent, Transmission) {
 
     Torrent.top100().then(function(top100){
       $scope.top100=top100;
