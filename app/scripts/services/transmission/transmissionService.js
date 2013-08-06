@@ -62,6 +62,7 @@ angular.module('transmissionservice').factory('Transmission', function ($http, $
     Transmission.addTorent = function (torrent) {
         return callRPC({
             method: 'torrent-add',
+            arguments:{metainfo:torrent},
             tag:6668
         });
     };
