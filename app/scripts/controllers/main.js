@@ -10,6 +10,21 @@ angular.module('dlplateformApp').controller('MainCtrl', function ($scope, Torren
         Torrent.download(id).then(function(torrent){
             Transmission.addTorent(torrent);
         });
-
     };
+});
+
+
+angular.module('dlplateformApp').controller('SearchController', function($scope, $location, $route, Search){
+    $scope.performSearch = function(){
+
+        Search.SetSearchValue($scope.currentSearch);
+        if($location.path() == "/results") $route.reload();
+        else $location.path("/results");
+    };
+});
+
+angular.module('dlplateformApp').controller('ResultController', function($scope, Torrent, Search){
+        Torrent.search(Search.GetSearchValue()).then(function(searchdatas){
+            $scope.top100 = searchdatas;
+        });
 });
