@@ -1,1 +1,8 @@
-<pre>{{ info.data | json }}</pre>
+Nombre de torrent : {{ info.torrentCount }}
+
+<div ng-repeat="torrent in torrents">
+    {{ torrent.name }} percent Done : {{ torrent.percentDone }} % Size : {{ torrent.totalSize |bytesToMo}}
+    <div class="progress progress-striped active">
+        <div class="progress-bar" ng-style="{width: torrent.percentDone+'%'}" ></div>
+    </div>
+</div>

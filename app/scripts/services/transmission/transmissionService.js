@@ -78,5 +78,12 @@ angular.module('transmissionservice').factory('Transmission', function ($http, $
         //TODO listen callback and reject call if added torrent in transmission failed @see RPC transmission doc : https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt
     };
 
+    Transmission.getTorrents = function(){
+        return   callRPC({
+            method: 'torrent-get',
+            arguments:{fields: [ 'id', 'name', 'percentDone', 'totalSize' ],tag:0}
+        });
+    };
+
     return Transmission;
 });
