@@ -38,7 +38,7 @@
             <li><a href="#/connectTr">Login Transmission</a></li>
 
         </ul>
-        <form class="form-search" ng-controller="SearchController" >
+        <form class="form-search" ng-controller="SearchController" ng-submit="performSearch()">
             <input type="text" class="input-medium search-query" ng-model="currentSearch">
             <button type="submit" class="btn btn-primary" ng-click="performSearch()" >Rechercher</button>
         </form>
