@@ -1,13 +1,12 @@
 'use strict';
 
-angular.module('transmissionservice', []);
+angular.module('transmissionservice', ['localStorage']);
 
-angular.module('transmissionservice').factory('Transmission', function ($http, $q) {
+angular.module('transmissionservice').factory('Transmission', function ($http, $q, $log, $window,localStorageService) {
 
     var Transmission = {};
 
-    var server = localStorage.transmissioServer;
-    var auth = localStorage.transmissionAuth;
+    var tranmissionConfig = localStorageService.get('transmission');
 
     var session;
 
@@ -15,7 +14,7 @@ angular.module('transmissionservice').factory('Transmission', function ($http, $
     function config() {
         return {
             headers: {
-                Authorization: 'Basic ' + auth,
+                Authorization: 'Basic ' + tranmissionConfig.auth,
                 'X-Transmission-Session-Id': session
             }
         };
@@ -23,29 +22,36 @@ angular.module('transmissionservice').factory('Transmission', function ($http, $
 
     Transmission.connect = function (connect) {
 
-        localStorage.transmissioServer = connect.server;
-        server = connect.server;
+        tranmissionConfig = {
+            server : connect.server,
+            auth: $window.btoa(connect.login + ':' + connect.password)
+        };
 
-        auth = btoa(connect.login + ':' + connect.password);
-        localStorage.transmissionAuth = auth;
+        localStorageService.add('transmission', tranmissionConfig );
     };
 
     Transmission.getServer = function () {
-        return localStorage.transmissioServer;
+
+        if (tranmissionConfig){
+            return tranmissionConfig.server;
+        }
+
+        return null;
     };
 
-    function callRPC(options) {
-        return $http.post(server, options, config()).then(function (data) {
+    function callRPC(transmissionOption) {
+
+        $log.debug('transmission call '+transmissionOption.method);
+
+        return $http.post(tranmissionConfig.server, transmissionOption, config()).then(function (data) {
             return data;
         }, function (data) {
 
             if (data.status === 409) {
 
                 session = data.headers('X-Transmission-Session-Id');
-                console.log(session);
 
-
-                return callRPC(options);
+                return callRPC(transmissionOption);
             } else {
                 return $q.reject(data);
             }
@@ -53,20 +59,24 @@ angular.module('transmissionservice').factory('Transmission', function ($http, $
     }
 
     Transmission.stats = function () {
+
         return callRPC({
                 method: 'session-stats',
-                tag:6667
+                tag:0
             });
     };
 
-    Transmission.addTorent = function (torrent) {
-        return callRPC({
-            method: 'torrent-add',
-            arguments:{metainfo:torrent},
-            tag:6668
-        });
-    };
 
+    Transmission.addTorent = function (torrent) {
+
+        var base64Torrent=  $window.btoa(String.fromCharCode.apply(null, new Uint8Array(torrent)));
+        return   callRPC({
+                method: 'torrent-add',
+                arguments:{metainfo:base64Torrent}
+            });
+
+        //TODO listen callback and reject call if added torrent in transmission failed @see RPC transmission doc : https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt
+    };
 
     return Transmission;
 });

@@ -21,6 +21,7 @@
     "unused": true,
 
   "globals": {
-    "angular": false
+    "angular": false,
+    "Base64":false
   }
 }

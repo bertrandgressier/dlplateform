@@ -1,4 +1,4 @@
-'use strict;'
+'use strict';
 
 angular.module('dlplateformApp').controller('TransmissionInfoCtrl', function ($scope,Transmission) {
 

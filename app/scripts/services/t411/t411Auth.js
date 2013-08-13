@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('t411service').factory('T411Auth', function (Properties, $http, $q) {
+angular.module('t411service').factory('T411Auth', function (Properties, $http, $q, localStorageService) {
 
     var T411Auth = {};
 
@@ -13,7 +13,7 @@ angular.module('t411service').factory('T411Auth', function (Properties, $http, $
             }
 
 
-            localStorage.t411token = data.data.token;
+            localStorageService.add('t411token',data.data.token);
 
             return data.data;
 
@@ -23,7 +23,7 @@ angular.module('t411service').factory('T411Auth', function (Properties, $http, $
     };
 
     T411Auth.getAuthorization = function () {
-        return localStorage.t411token;
+        return localStorageService.get('t411token');
     };
 
     return T411Auth;

@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('t411service',['config']);
+angular.module('t411service',['config','localStorage']);
