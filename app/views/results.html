@@ -1,0 +1,22 @@
+<table class="table table-striped">
+    <caption>Search results</caption>
+    <thead>
+        <tr>
+            <th>Titre ki roxx</th>
+            <th>Size{{currentSearch}}</th>
+            <th>Seeder</th>
+            <th>Leecher</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="result in results">
+            <td>{{ result.name }}</td>
+            <td class="col-lg-3">{{ top.size|bytesToMo }}</td>
+            <td>{{ result.seeders }}</td>
+            <td>{{ result.leechers }}</td>
+            <td class="col-lg-1" ng-click="getIt(top.id)"><button>Get it !</button></td>
+        </tr>
+    </tbody>
+
+</table>

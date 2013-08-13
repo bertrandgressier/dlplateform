@@ -15,6 +15,9 @@ angular.module('dlplateformApp').config(function ($routeProvider, $httpProvider)
         }).when('/transmissionInfo',{
             templateUrl: 'views/transmissionInfo.html',
             controller: 'TransmissionInfoCtrl'
+        }).when('/results',{
+            templateUrl: 'views/main.html',
+            controller: 'ResultController'
         }).
         otherwise({
             redirectTo: '/'
@@ -22,4 +25,6 @@ angular.module('dlplateformApp').config(function ($routeProvider, $httpProvider)
 
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+
 });
