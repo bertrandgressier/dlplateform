@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dlplateformApp', ['t411service','transmissionservice']);
+angular.module('dlplateformApp', ['t411service','transmissionservice','ngRoute']);
 angular.module('dlplateformApp').config(function ($routeProvider, $httpProvider) {
 
     $routeProvider.when('/', {
@@ -23,8 +23,6 @@ angular.module('dlplateformApp').config(function ($routeProvider, $httpProvider)
             redirectTo: '/'
         });
 
-    $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
 
 });
